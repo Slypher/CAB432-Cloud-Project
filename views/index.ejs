@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+
+<head>
+    <% include header %>
+</head>
+
+<body>
+    <% include navbar %>
+
+    <div class='container'>
+        <div class='jumbotron text-center'>
+            <h1><span class='fa fa-twitter'></span> CAB432-Cloud-Project</h1>
+        </div>
+
+        <div class='col-sm-10 col-sm-offset-1' style='border-radius: 100px;'>
+            <% if (typeof tweets != 'undefined') { %>
+                <% if (tweets.length === 0) { %>
+                    <div class='well'>
+                        <h3>No tweets found!</h3>
+                    </div>
+                <% } %>
+                <% for (var i = 0; i < tweets.length; i++) { %>
+                    <% include tweet_template %>
+                <% } %>
+            <% } %>
+        </div>
+    </div>
+</body>
+</html>

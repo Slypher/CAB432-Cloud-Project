@@ -1,0 +1,29 @@
+{
+  "name": "cab432-cloud-project",
+  "version": "1.0.0",
+  "description": "Cloud Computing - Assignment 2",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Slypher/CAB432-Cloud-Project.git"
+  },
+  "author": "Connor Gillespie",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Slypher/CAB432-Cloud-Project/issues"
+  },
+  "homepage": "https://github.com/Slypher/CAB432-Cloud-Project#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "ejs": "^2.5.2",
+    "express": "^4.14.0",
+    "lodash": "^4.16.5",
+    "morgan": "^1.7.0",
+    "qs": "^6.2.1",
+    "serve-favicon": "^2.3.0",
+    "twitter": "^1.4.0"
+  }
+}

@@ -1,0 +1,31 @@
+body {
+    padding-top: 120px;
+    word-wrap: break-word;
+    padding-bottom: 40px;
+}
+
+.navbar .divider-vertical {
+    margin-top: 8px;
+    height: 34px;
+    border-left: 1px solid;
+    border-left-color: #BABABA;
+    float: top;
+    opacity: 0.5;
+}
+
+.search-form {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+}
+
+.well.media {
+    margin-top: 25px;
+    padding: 10px;
+}
+
+.panel-body {
+    width:240px;
+    height:120px;
+    overflow-y: scroll;
+}
