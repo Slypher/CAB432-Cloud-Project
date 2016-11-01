@@ -8,15 +8,23 @@ const lodash = require('lodash');
 
 const accessKeyId = auth.aws.access_key_id;
 const secretAccessKey = auth.aws.secret_access_key;
-const credentials = new AWS.Credentials(accessKeyId, secretAccessKey);
 
-AWS.config.Credentials = credentials;
+AWS.config.update({
+    accessKeyId: accessKeyId,
+    secretAccessKey: secretAccessKey,
+    region: auth.aws.region,
+    apiVersions: auth.aws.api_versions
+});
 
-var sqs = new AWS.SQS({ apiVersion: '2012-11-05' });
+//var elb = new AWS.ELB({  });
+//var ec2 = new AWS.EC2({  });
+var sqs = new AWS.SQS({  });
+var queueUrl = '';
 
-//sqs.createQueue();
-
-//var ec2 = new AWS.EC2({ apiVersion: '2016-09-15' });
+sqs.createQueue({ QueueName: 'Tweets' }, function (err, data) {
+    if (err) console.log(err, err.stack);
+    else queueUrl = data.QueueUrl;
+});
 
 const isTweet = lodash.conforms({
     user: lodash.isObject,
@@ -33,9 +41,37 @@ const client = new Twitter({
 
 var stream = client.stream('statuses/sample', { language: 'en' });
 
+var Entries = []
 stream.on('data', function (event) {
     //console.log(event && event.text);
-    if (isTweet(event)) tweets.push(event);
+    if (isTweet(event)) {
+        Entries.push({
+            Id: Entries.length.toString(),
+            MessageBody: event.text,
+            MessageAttributes: {
+                'name': {
+                    DataType: 'String',
+                    StringValue: event.user.name
+                },
+                'screen_name': {
+                    DataType: 'String',
+                    StringValue: event.user.screen_name
+                }
+            }
+        });
+
+        if (Entries.length === 10) {
+            sqs.sendMessageBatch({
+                Entries: Entries,
+                QueueUrl: queueUrl
+            }, function (err, data) {
+                if (err) console.log(err, err.stack);
+                else console.log('Messages added');
+            });
+
+            Entries = [];
+        }
+    }
 });
 
 stream.on('error', function (error) {
