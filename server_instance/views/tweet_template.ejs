@@ -1,13 +1,16 @@
-<div class='well media' id='tweet_<%= i %>'>
-    <span id='tweet_text'>
+<div class='well media' id='tweet'>
+    <div class='media-left'>
+        <img class='media-object' src='<%= tweets[i].image_url %>' alt='Generic placeholder image'>
+    </div>
+    <div class='media-body'>
+        <h5 class='media-heading'>@<%= tweets[i].screen_name %></h5>
+        <span id='tweet_text'>
         <% if (typeof tweets[i].text != 'undefined') { %>
             <%= tweets[i].text %>
         <% } else { %>
             Error displaying tweet
         <% } %>
     </span>
-    <div class='media-left'>
-        
     </div>
     <div class='media-right'>
         

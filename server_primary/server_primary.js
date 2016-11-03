@@ -19,7 +19,7 @@ AWS.config.update({
 var sqs = new AWS.SQS({  });
 var queueUrl = '';
 
-sqs.createQueue({ QueueName: 'Tweets' }, function (err, data) {
+sqs.createQueue({ QueueName: 'tweets' }, function (err, data) {
     if (err) console.log(err, err.stack);
     else queueUrl = data.QueueUrl;
 });
@@ -41,7 +41,7 @@ var stream = client.stream('statuses/sample', { language: 'en' });
 
 var Entries = []
 stream.on('data', function (event) {
-    //console.log(event && event.text);
+    //console.log(event);
     if (isTweet(event)) {
         Entries.push({
             Id: Entries.length.toString(),
@@ -54,6 +54,10 @@ stream.on('data', function (event) {
                 'screen_name': {
                     DataType: 'String',
                     StringValue: event.user.screen_name
+                },
+                'image_url': {
+                    DataType: 'String',
+                    StringValue: event.user.profile_image_url
                 }
             }
         });

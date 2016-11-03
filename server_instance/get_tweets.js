@@ -2,6 +2,8 @@
 
 const auth = require('./auth.json');
 
+const sentiment = require('sentiment');
+const natural = require('natural');
 const AWS = require('aws-sdk');
 
 const accountId = auth.aws.account_id;
@@ -18,7 +20,7 @@ AWS.config.update({
 var sqs = new AWS.SQS({});
 var queueUrl = '';
 
-sqs.getQueueUrl({ QueueName: 'Tweets', QueueOwnerAWSAccountId: accountId }, function (err, data) {
+sqs.getQueueUrl({ QueueName: 'tweets', QueueOwnerAWSAccountId: accountId }, function (err, data) {
     if (err) console.log(err, err.stack);
     else queueUrl = data.QueueUrl;
 });
@@ -55,7 +57,8 @@ var getMessages = function (callback, complete) {
                 response.push({
                     'text': data.Messages[i].Body,
                     'screen_name': data.Messages[i].MessageAttributes.screen_name.StringValue,
-                    'name': data.Messages[i].MessageAttributes.name.StringValue
+                    'name': data.Messages[i].MessageAttributes.name.StringValue,
+                    'image_url': data.Messages[i].MessageAttributes.image_url.StringValue
                 });
             }
             callback(response, complete);

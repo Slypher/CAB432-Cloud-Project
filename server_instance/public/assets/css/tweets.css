@@ -1,0 +1,23 @@
+.media-object {
+    border-radius: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-color: #8899a6;
+    border-top-style: solid;
+    border-top-width: 1px;
+    border-right-color: #8899a6;
+    border-right-style: solid;
+    border-right-width: 1px;
+    border-bottom-color: #8899a6;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-left-color: #8899a6;
+    border-left-style: solid;
+    border-left-width: 1px;
+}
+
+.media-heading {
+    color: #8899a6;
+}

@@ -4,6 +4,7 @@
 <head>
     <script src='/assets/js/jquery-3.1.1.min.js' type='text/javascript'></script>
     <script src='/assets/js/poll.js' type='text/javascript'></script>
+    <link rel='stylesheet' href='/assets/css/tweets.css'>
     <% include header %>
 </head>
 
@@ -15,7 +16,19 @@
             <h1><span class='fa fa-twitter'></span> CAB432-Cloud-Project</h1>
         </div>
 
-        <div class='col-sm-10 col-sm-offset-1' style='border-radius: 100px;' id='tweet_container'>
+        
+
+        <div class='col-sm-8 col-sm-offset-2' style='border-radius: 100px;' id='tweet_container'>
+            <form>
+                <div class='form-group'>
+                    <div class='input-group' style='width:100%;'>
+                        <span class='input-group-addon'>Queries</span>
+                        <input type='text' class='form-control' name='queries' placeholder='Separate queries with a comma...'>
+                        <span class='input-group-btn'><button class='btn btn-primary' type='submit'>Search</button></span>
+                    </div>
+                </div>
+            </form>
+
             <% if (typeof tweets != 'undefined') { %>
                 <% if (tweets.length === 0) { %>
                     <div class='well'>
