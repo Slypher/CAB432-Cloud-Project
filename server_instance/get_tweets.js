@@ -47,7 +47,7 @@ var getMessages = function (callback) {
     sqs.receiveMessage({
         QueueUrl: queueUrl,
         MaxNumberOfMessages: 10,
-        VisibilityTimeout: 5, 
+        VisibilityTimeout: 60, 
         WaitTimeSeconds: 1,
         AttributeNames: [
             "All"
@@ -76,12 +76,13 @@ var validMessage = function (queries, message) {
     if (queries == undefined || queries == null || queries == '') return true;
 
     var tokenizer = new natural.WordTokenizer();
-    var tokens = tokenizer.tokenize(message.text);
-    for (var i = 0; i < queries.length; i++) if (!tokens.includes(queries[i])) return false;
+    var tokens = tokenizer.tokenize(message.text.toLowerCase());
+    for (var i = 0; i < queries.length; i++) if (!tokens.includes(queries[i].toLowerCase())) return false;
     return true;
 }
 
 var formatMessage = function (message) {
     if (message.text.substring(0, 3) == 'RT ') message.text = message.text.substring(3);
+    message.sentiment = sentiment(message.text);
     return message;
 }
