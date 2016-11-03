@@ -32,7 +32,7 @@ module.exports = function (queries, callback) {
     }
 
     messages = []
-    for (var i = 0; i < 10; i++) getMessages(addMessages, (i == 9));
+    for (var i = 0; i < 1; i++) getMessages(addMessages, (i == 0));
 }
 
 var getMessages = function (callback, complete) {

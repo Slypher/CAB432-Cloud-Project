@@ -16,8 +16,6 @@ AWS.config.update({
     apiVersions: auth.aws.api_versions
 });
 
-//var elb = new AWS.ELB({  });
-//var ec2 = new AWS.EC2({  });
 var sqs = new AWS.SQS({  });
 var queueUrl = '';
 
