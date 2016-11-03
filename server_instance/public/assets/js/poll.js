@@ -1,6 +1,8 @@
 $( document ).ready(sendPoll());
+$( document ).ready(populateQueryBox());
 
 function sendPoll(){
+    console.log('Sent poll');
     $.ajax({
         url: '/',
         data: { 'queries': getParameter('queries') },
@@ -32,4 +34,9 @@ function getParameter(name) {
     if (!results) return null;
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+
+function populateQueryBox() {
+    var queries = getParameter('queries');
+    if (queries !== '') $( document ).ready(function() { document.getElementsByName('queries')[0].value = queries; });
 }

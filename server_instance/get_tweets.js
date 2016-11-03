@@ -26,18 +26,24 @@ sqs.getQueueUrl({ QueueName: 'tweets', QueueOwnerAWSAccountId: accountId }, func
 });
 
 var messages;
+var counter;
 
 module.exports = function (queries, callback) {
-    var addMessages = function (response, complete) {
-        for (var i = 0; i < response.length; i++) messages.push(response[i]);
-        if (complete) return callback(messages);
+    var addMessages = function (response) {
+        counter += 1;
+        for (var i = 0; i < response.length; i++) if (validMessage(queries, response[i])) messages.push(formatMessage(response[i]));
+
+        if (counter >= 20) return callback([]);
+        if (messages.length >= 1) callback(messages);
+        else getMessages(addMessages);
     }
 
-    messages = []
-    for (var i = 0; i < 1; i++) getMessages(addMessages, (i == 0));
+    messages = [];
+    counter = 0;
+    getMessages(addMessages);
 }
 
-var getMessages = function (callback, complete) {
+var getMessages = function (callback) {
     sqs.receiveMessage({
         QueueUrl: queueUrl,
         MaxNumberOfMessages: 10,
@@ -61,7 +67,21 @@ var getMessages = function (callback, complete) {
                     'image_url': data.Messages[i].MessageAttributes.image_url.StringValue
                 });
             }
-            callback(response, complete);
+            callback(response);
         }
     });
+}
+
+var validMessage = function (queries, message) {
+    if (queries == undefined || queries == null || queries == '') return true;
+
+    var tokenizer = new natural.WordTokenizer();
+    var tokens = tokenizer.tokenize(message.text);
+    for (var i = 0; i < queries.length; i++) if (!tokens.includes(queries[i])) return false;
+    return true;
+}
+
+var formatMessage = function (message) {
+    if (message.text.substring(0, 3) == 'RT ') message.text = message.text.substring(3);
+    return message;
 }
