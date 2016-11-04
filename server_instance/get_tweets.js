@@ -2,7 +2,6 @@
 
 const auth = require('./auth.json');
 
-const sentiment = require('sentiment');
 const natural = require('natural');
 const AWS = require('aws-sdk');
 
@@ -88,6 +87,7 @@ var validMessage = function (queries, message) { // function to determine if a m
 
 var formatMessage = function (message) { // function to add sentiment and remove twitter formatting
     if (message.text.substring(0, 3) == 'RT ') message.text = message.text.substring(3);
+    var sentiment = require('sentiment');
     message.sentiment = sentiment(message.text);
     return message;
 }
