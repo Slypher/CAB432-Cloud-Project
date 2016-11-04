@@ -34,7 +34,7 @@ module.exports = function (queries, callback) { // the get_tweets() function
         // loop through response, check if valid and push formatted valid message
         for (var i = 0; i < response.length; i++) if (validMessage(queries, response[i])) messages.push(formatMessage(response[i]));
 
-        if (counter >= 20) return callback([]); // prevent infinite recursion after 20 * 10 messages filtered
+        if (counter >= 5) return callback([]); // prevent infinite recursion after 5 * 10 messages filtered
         if (messages.length >= 1) callback(messages); // return at minimum one tweet
         else getMessages(addMessages); // recursion entry point
     }
