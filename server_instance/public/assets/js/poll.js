@@ -10,11 +10,11 @@ function sendPoll(){
         error: function (data) {
             console.log('--- ERROR ---');
             console.log(data);
-            setTimeout(sendPoll, 5000);
+            setTimeout(sendPoll, 2000);
         },
         success: function (data) {
             console.log('Received ' + data.tweets.length + ' tweets');
-            setTimeout(sendPoll, 5000);
+            setTimeout(sendPoll, 2000);
             $(document).ready(function() {
                 for (var i = 0; i < data.tweets.length; i++) {
                     var $last_tweet = $('#tweet_container').children().last();
