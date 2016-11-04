@@ -1,9 +1,6 @@
 # CAB432-Cloud-Project
 A scaling webserver which displays a live stream of tweets, filtered by certain query parameters
 
-## How to use
-
-
 ## auth.json Format
 
     {
