@@ -16,8 +16,8 @@ Placeholder
     }
 
 # Credits
-placeholder  
-placeholder
+https://aws.amazon.com/sdk-for-node-js/  
+https://www.npmjs.com/package/twitter
 
 http://getbootstrap.com/  
 http://fontawesome.io/
