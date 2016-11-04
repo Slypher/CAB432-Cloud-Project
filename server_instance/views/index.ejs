@@ -31,8 +31,20 @@
 
             <% if (typeof tweets != 'undefined') { %>
                 <% if (tweets.length === 0) { %>
-                    <div class='well'>
-                        <h4>No tweets found!</h4>
+                    <div class='well media' id='tweet'>
+                        <div class='media-left'>
+                            <img class='media-object' src='' alt='Generic placeholder image'>
+                        </div>
+                        <div class='media-body'>
+                            <h5 class='media-heading'>@Username</h5>
+                            <span id='tweet_text'>
+                            No tweets found
+                        </span>
+                        </div>
+                        <div class='media-right'>
+                            <span class='fa fa-meh-o'></span>
+                            0
+                        </div>
                     </div>
                 <% } %>
                 <% for (var i = 0; i < tweets.length; i++) { %>
