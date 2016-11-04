@@ -76,7 +76,7 @@ var getMessages = function (callback) {
 var validMessage = function (queries, message) {
     if (queries == undefined || queries == null || queries == '') return true;
     
-    generateLoad(2500);
+    for (var i = 0; i < queries.length; i++) generateLoad(1000);
 
     var tokenizer = new natural.WordTokenizer();
     var tokens = tokenizer.tokenize(message.text.toLowerCase());
