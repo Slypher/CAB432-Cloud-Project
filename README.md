@@ -1,5 +1,5 @@
 # CAB432-Cloud-Project
-Placeholder
+A scaling webserver which displays a live stream of tweets, filtered by certain query parameters
 
 ## How to use
 
@@ -12,6 +12,17 @@ Placeholder
             "consumer_secret": "INSERT_HERE",
             "access_token_key": "INSERT_HERE",
             "access_token_secret": "INSERT_HERE"
+        },
+        "aws": {
+            "account_id": "INSERT_HERE",
+            "access_key_id": "INSERT_HERE",
+            "secret_access_key": "INSERT_HERE",
+            "region": "us-west-2",
+            "api_versions": {
+                "ec2": "2016-09-15",
+                "sqs": "2012-11-05",
+                "elb": "2012-06-01"
+            }
         }
     }
 
