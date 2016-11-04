@@ -21,7 +21,7 @@ function sendPoll(){
                     var $new_tweet = $last_tweet.clone();
                     $new_tweet.find('#tweet_text').html(data.tweets[i].text);
                     $new_tweet.find('.media-heading').html(data.tweets[i].screen_name);
-                    $new_tweet.find('.meda-object').attr('src', data.tweets[i].image_url)
+                    $new_tweet.find('.media-object').attr('src', data.tweets[i].image_url)
                     $new_tweet.find('#sentiment').html(data.tweets[i].sentiment.score);
                     $('#tweet_container').append($new_tweet);
                 }
