@@ -59,6 +59,7 @@ var getMessages = function (callback) {
         if (err) console.log(err, err.stack);
         else {
             var response = []
+            if (!data.Messages) return callback([]);
             for (var i = 0; i < data.Messages.length; i++) {
                 response.push({
                     'text': data.Messages[i].Body,
@@ -74,10 +75,12 @@ var getMessages = function (callback) {
 
 var validMessage = function (queries, message) {
     if (queries == undefined || queries == null || queries == '') return true;
+    
+    generateLoad(2500);
 
     var tokenizer = new natural.WordTokenizer();
     var tokens = tokenizer.tokenize(message.text.toLowerCase());
-    for (var i = 0; i < queries.length; i++) if (!tokens.includes(queries[i].toLowerCase())) return false;
+    for (var i = 0; i < queries.length; i++) if (tokens.indexOf(queries[i].toLowerCase()) === -1) return false;
     return true;
 }
 
@@ -85,4 +88,14 @@ var formatMessage = function (message) {
     if (message.text.substring(0, 3) == 'RT ') message.text = message.text.substring(3);
     message.sentiment = sentiment(message.text);
     return message;
+}
+
+var generateLoad = function (ms) {
+	var now = new Date().getTime();
+	var result = 0
+	while(shouldRun) {
+		result += Math.random() * Math.random();
+		if (new Date().getTime() > now +ms)
+			break;
+	}	
 }
