@@ -2,7 +2,7 @@ const http = require('http');
 
 'use strict';
 
-module.exports = function (app) {
+module.exports = function (app) { // webserver routes
 
     app.get('/', require('./routes/index.js'));
     app.get('/about', require('./routes/about.js'));
